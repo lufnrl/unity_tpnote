@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int CoinCount {get; private set;}
+    public static int TomatoRipeCount {get; private set;}
+    public static int TomatoUnripeCount {get; private set;}
     public static int Score {get; private set;}
     public static bool IsGameWon {get; private set;}
     public static bool IsTimeUp {get; private set;}
@@ -15,8 +16,10 @@ public class GameManager : MonoBehaviour
     float _gameEndTime;
     void Start()
     {
-        CoinCount = FindObjectsOfType<TomatoRipe>().Length; // Calculer le nombre de pièces dans la scène
-        Debug.Log("Nombre de pièces : " + CoinCount); // Afficher le compte dans la console
+        TomatoRipeCount = FindObjectsOfType<TomatoRipe>().Length; // Calculer le nombre de pièces dans la scène
+        Debug.Log("Nombre de bonnes tomates : " + TomatoRipeCount); // Afficher le compte dans la console
+        TomatoUnripeCount = FindObjectsOfType<TomatoUnripe>().Length; // Calculer le nombre de pièces dans la scène
+        Debug.Log("Nombre de mauvaises tomates : " + TomatoUnripeCount); // Afficher le compte dans la console
 
         // Initialiser le score, l'état
         Score = 0;
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Score : " + Score); // Display score in the console
 
         // If score equals the number of coins, the game is won
-        if (Score == CoinCount)
+        if (Score == TomatoRipeCount)
         {
             IsGameWon = true;
             Debug.Log("Jeu gagné!");
