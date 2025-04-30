@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool IsGameWon {get; private set;}
     public static bool IsTimeUp {get; private set;}
     public static float TimeRemaining {get; private set;}
+    public static UIManager uiManager;
 
     [SerializeField] float timerLength = 300f;
 
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+    
+        uiManager = FindObjectOfType<UIManager>();
+        
         // Si le jeu est gagné ou perdu, ne rien mettre à jour
         if (IsGameWon || IsTimeUp)
         {
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             IsTimeUp = true;
             Debug.Log("Jeu perdu :(");
+            uiManager.ShowGameOverScreen();
         }
     }
 
@@ -73,6 +78,7 @@ public class GameManager : MonoBehaviour
         {
             IsGameWon = true;
             Debug.Log("Jeu gagné!");
+            uiManager.ShowWinScreen();
         }
     }
 }
